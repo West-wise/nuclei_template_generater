@@ -182,3 +182,5 @@ pyrightconfig.json
 
 *.json
 *.yaml
+*.yml
+*.ini
