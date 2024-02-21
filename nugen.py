@@ -94,9 +94,29 @@ def create_config_file(key_value):
         config.write(configfile)
     
     sys.exit(0)
-    
+
+
+def check_args(args):
+    if args.cve_id is None or args.author is None:
+        if args.cve_id is None:
+            print("CVE ID is missing")
+            sys.exit(1)
+        if args.author is None:
+            print("Author is missing")
+            sys.exit(1)
+        if args.cve_id is None and args.author is None:
+            if args.cve_id is None:
+                print("CVE_ID and Author are missing")
+                sys.exit(1)
+                
 def main():
-    
+    try:
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        api_key = config['DEFAULT']['api_key']
+    except :
+        print("Config file not found")
+        print("Please create a config file using --config option")
     args = parse_arguments()
     
     if args.config:
